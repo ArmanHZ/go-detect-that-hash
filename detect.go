@@ -26,6 +26,12 @@ var (
 				{"FCS-16", -1, "", false},
 			},
 		},
+		{ // List incomplete. Only sha-256 for testing
+			regexp: regexp.MustCompile(`^[aA-fF0-9]{64}(:.+)?$`),
+			mode: []HashInfo{
+				{"SHA-256", 1400, "raw-sha256", false},
+			},
+		},
 	}
 )
 
