@@ -537,12 +537,12 @@ var (
 				{"Skein-1024", -1, "", false},
 			},
 		},
-		{
-			regexp: regexp.MustCompile(`^grub\.pbkdf2\.sha512\.[0-9]+\.([a-f0-9]{128,2048}\.|[0-9]+\.)?[a-f0-9]{128}$`),
-			mode: []HashInfo{
-				{"GRUB 2", 7200, "", false},
-			},
-		},
+		// {
+		// 	regexp: regexp.MustCompile(`^grub\.pbkdf2\.sha512\.[0-9]+\.([a-f0-9]{128,2048}\.|[0-9]+\.)?[a-f0-9]{128}$`),
+		// 	mode: []HashInfo{
+		// 		{"GRUB 2", 7200, "", false},
+		// 	},
+		// },
 		{
 			regexp: regexp.MustCompile(`^sha1\$[a-z0-9]+\$[a-f0-9]{40}$`),
 			mode: []HashInfo{
@@ -609,12 +609,12 @@ var (
 				{"Cisco VPN Client(PCF-File)", -1, "", false},
 			},
 		},
-		{
-			regexp: regexp.MustCompile(`^[a-f0-9]{1329}$`),
-			mode: []HashInfo{
-				{"Microsoft MSTSC(RDP-File)", -1, "", false},
-			},
-		},
+		// {
+		// 	regexp: regexp.MustCompile(`^[a-f0-9]{1329}$`),
+		// 	mode: []HashInfo{
+		// 		{"Microsoft MSTSC(RDP-File)", -1, "", false},
+		// 	},
+		// },
 		{
 			regexp: regexp.MustCompile(`^[^\\\/:*?"<>|]{1,20}[:]{2,3}([^\\\/:*?"<>|]{1,20})?:[a-f0-9]{48}:[a-f0-9]{48}:[a-f0-9]{16}$`),
 			mode: []HashInfo{
@@ -789,12 +789,12 @@ var (
 				{"PHPS", 2612, "phps", false},
 			},
 		},
-		{
-			regexp: regexp.MustCompile(`^[0-9]{4}:[a-f0-9]{16}:[a-f0-9]{2080}$`),
-			mode: []HashInfo{
-				{"1Password(Agile Keychain)", 6600, "", false},
-			},
-		},
+		// {
+		// 	regexp: regexp.MustCompile(`^[0-9]{4}:[a-f0-9]{16}:[a-f0-9]{2080}$`),
+		// 	mode: []HashInfo{
+		// 		{"1Password(Agile Keychain)", 6600, "", false},
+		// 	},
+		// },
 		{
 			regexp: regexp.MustCompile(`^[a-f0-9]{64}:[a-f0-9]{32}:[0-9]{5}:[a-f0-9]{608}$`),
 			mode: []HashInfo{
@@ -903,12 +903,12 @@ var (
 				{"Microsoft Office 2013", 9600, "", false},
 			},
 		},
-		{
-			regexp: regexp.MustCompile(`^\$fde\$[0-9]{2}\$[a-f0-9]{32}\$[0-9]{2}\$[a-f0-9]{32}\$[a-f0-9]{3072}$`),
-			mode: []HashInfo{
-				{"Android FDE ≤ 4.3", 8800, "fde", false},
-			},
-		},
+		// {
+		// 	regexp: regexp.MustCompile(`^\$fde\$[0-9]{2}\$[a-f0-9]{32}\$[0-9]{2}\$[a-f0-9]{32}\$[a-f0-9]{3072}$`),
+		// 	mode: []HashInfo{
+		// 		{"Android FDE ≤ 4.3", 8800, "fde", false},
+		// 	},
+		// },
 		{
 			regexp: regexp.MustCompile(`^\$oldoffice\$[01]\*[a-f0-9]{32}\*[a-f0-9]{32}\*[a-f0-9]{32}$`),
 			mode: []HashInfo{
