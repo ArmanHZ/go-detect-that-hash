@@ -4,10 +4,13 @@ package gdth
 
 // returns a slice of possible hashes
 func Detect(hash string) []HashInfo {
+	var hashes []HashInfo
+
 	for _, proto := range prototypes {
 		if proto.regexp.MatchString(hash) {
-			return proto.mode
+			hashes = append(hashes, proto.mode...)
 		}
 	}
-	return nil
+
+	return hashes
 }
