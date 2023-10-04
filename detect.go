@@ -2,15 +2,14 @@ package gdth
 
 import (
 	"fmt"
+	"text/tabwriter"
 )
 
-// TODO prettier printing. Similar to a table with word length checks
+// TODO prettier formatting for the table
 // TODO color coded
 // TODO some hashcat, john and extended info seems to be mission
-// For now, we only print the name
-func PrintHash(hashInfo HashInfo) {
-	// fmt.Printf("%s\t%d\t%s\t%t\n", hashInfo.Name, hashInfo.Hashcat, hashInfo.John, hashInfo.Extended)
-	fmt.Printf("%s\n", hashInfo.Name)
+func PrintHash(tabWritter *tabwriter.Writer, hashInfo HashInfo) {
+	fmt.Fprintf(tabWritter, "%s\t%d\t%s\t%t\n", hashInfo.Name, hashInfo.Hashcat, hashInfo.John, hashInfo.Extended)
 }
 
 // returns a slice of possible hashes
