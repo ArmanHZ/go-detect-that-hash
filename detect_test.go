@@ -6,7 +6,7 @@ import (
 
 func checkIncludedHash(hashes []HashInfo, hash string) bool {
 	for _, h := range hashes {
-		if h.name == hash {
+		if h.Name == hash {
 			return true
 		}
 	}

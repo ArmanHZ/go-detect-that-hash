@@ -7,10 +7,10 @@ import (
 )
 
 type HashInfo struct {
-	name     string
-	hashcat  int
-	john     string
-	extended bool
+	Name     string
+	Hashcat  int
+	John     string
+	Extended bool
 }
 
 type Prototype struct {
