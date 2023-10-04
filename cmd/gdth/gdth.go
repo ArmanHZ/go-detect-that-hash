@@ -13,7 +13,9 @@ func main() {
 	inputHash := os.Args[1]
 	results := gdth.Detect(inputHash)
 
+	fmt.Println("Name\t\tHashCat ID\t\tJohn ID\t\tIs extended")
+	fmt.Println("-------------------------------------------------------------------")
 	for _, result := range results {
-		fmt.Println(result)
+		gdth.PrintHash(result)
 	}
 }
