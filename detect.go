@@ -7,7 +7,7 @@ func Detect(hash string) []HashInfo {
 	var hashes []HashInfo
 
 	for _, proto := range prototypes {
-		if proto.regexp.MatchString(hash) {
+		if proto.match(hash) {
 			hashes = append(hashes, proto.mode...)
 		}
 	}
