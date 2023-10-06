@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"text/tabwriter"
 
@@ -15,11 +14,7 @@ func main() {
 	results := gdth.Detect(inputHash)
 
 	tabWritter := tabwriter.NewWriter(os.Stdout, 0, 10, 1, ' ', 0)
-	fmt.Fprintln(tabWritter, "Name\tHashCat ID\tJohn ID\tIs extended")
-	fmt.Fprintln(tabWritter, "-----\t-----\t-----\t-----")
+	defer tabWritter.Flush()
 
-	for _, result := range results {
-		gdth.PrintHash(tabWritter, result)
-	}
-	tabWritter.Flush()
+	gdth.PrintHashes(tabWritter, results)
 }
