@@ -13,7 +13,7 @@ func main() {
 	inputHash := os.Args[1]
 	results := gdth.Detect(inputHash)
 
-	tabWritter := tabwriter.NewWriter(os.Stdout, 0, 10, 1, ' ', 0)
+	tabWritter := tabwriter.NewWriter(os.Stdout, 0, 0, 8, ' ', 0)
 	defer tabWritter.Flush()
 
 	gdth.PrintHashes(tabWritter, results)

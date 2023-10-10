@@ -5,23 +5,33 @@ import (
 	"text/tabwriter"
 )
 
-// TODO prettier formatting for the table
-// TODO color coded
-// TODO some hashcat, john and extended info seems to be missing
-func PrintHash(tabWritter *tabwriter.Writer, hashInfo HashInfo) {
-	fmt.Fprintf(tabWritter, "%s\t", hashInfo.Name)
-	if hashInfo.Hashcat != -1 {
-		fmt.Fprintf(tabWritter, "%d\t", hashInfo.Hashcat)
-	} else {
-		fmt.Fprintf(tabWritter, "\t")
-	}
+// Idk, I'll look at a way of doing Enum or Struct. This looks ugly lol
+const (
+	Color_reset = "\033[0m"
+	Color_cyan  = "\033[36m"
+	Color_red   = "\033[31m"
+	Color_green = "\033[32m"
+)
 
-	fmt.Fprintf(tabWritter, "%12s\t%t\n", hashInfo.John, hashInfo.Extended)
+// TODO prettier formatting for the table
+// TODO maybe we should create a print table file or have functions to do so
+func PrintHash(tabWritter *tabwriter.Writer, hashInfo HashInfo) {
+	fmt.Fprintf(tabWritter, Color_green+"%s\t"+Color_reset, hashInfo.Name)
+	if hashInfo.Hashcat != -1 {
+		fmt.Fprintf(tabWritter, Color_green+"%d\t"+Color_reset, hashInfo.Hashcat)
+	} else {
+		fmt.Fprintf(tabWritter, Color_red+"N/A\t"+Color_reset)
+	}
+	if hashInfo.John == "" {
+		fmt.Fprintf(tabWritter, Color_red+"N/A\t"+Color_reset)
+	} else {
+		fmt.Fprintf(tabWritter, Color_green+"%s\t"+Color_reset, hashInfo.John)
+	}
+	fmt.Fprintf(tabWritter, Color_green+"%t\n"+Color_reset, hashInfo.Extended)
 }
 
 func PrintHashes(tabWritter *tabwriter.Writer, hashInfo []HashInfo) {
-	fmt.Fprintln(tabWritter, "Name\tHashCat\tJohn\tIs extended\t")
-	fmt.Fprintln(tabWritter, "-----\t-----\t-----\t-----\t")
+	fmt.Fprintln(tabWritter, Color_cyan+"Name\tHashCat\tJohn\tIs extended"+Color_reset)
 	for _, hash := range hashInfo {
 		PrintHash(tabWritter, hash)
 	}
