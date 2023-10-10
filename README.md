@@ -61,6 +61,7 @@ BigCrypt                            N/A         bigcrypt              true
 ```
 
 # TODO
+- Add easy install via Go cmd tool
 - Cleanup the code and fix some bugs (never ending task)
 - Prettier output and colors using custom table printing functions
 - Add command line argument parser
