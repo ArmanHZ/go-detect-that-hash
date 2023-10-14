@@ -829,15 +829,25 @@ var (
 				{"Cisco VPN Client(PCF-File)", -1, "", false},
 			},
 		},
-		// {
-		// 	match: func(input string) bool {
-		// regex :=regexp.MustCompile(`^[a-f0-9]{1329}$`)
-		// return regex.MatchString(input)
-		// },
-		// 	mode: []HashInfo{
-		// 		{"Microsoft MSTSC(RDP-File)", -1, "", false},
-		// 	},
-		// },
+		{
+			match: func(input string) bool {
+				if len(input) != 1329 {
+					return false
+				}
+
+				// match for alphanumeric characters
+				for _, char := range input {
+					if char < 'a' || (char > 'f' && char < '0') || char > '9' {
+						return false
+					}
+				}
+
+				return true
+			},
+			mode: []HashInfo{
+				{"Microsoft MSTSC(RDP-File)", -1, "", false},
+			},
+		},
 		{
 			match: func(input string) bool {
 				return checkRegex(`^[^\\\/:*?"<>|]{1,20}[:]{2,3}([^\\\/:*?"<>|]{1,20})?:[a-f0-9]{48}:[a-f0-9]{48}:[a-f0-9]{16}$`, input)

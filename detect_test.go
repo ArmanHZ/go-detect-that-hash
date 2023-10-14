@@ -13,6 +13,8 @@ func checkIncludedHash(hashes []HashInfo, hash string) bool {
 	return false
 }
 
+// most hashes have been taken from https://hashcat.net/wiki/doku.php?id=example_hashes
+
 func TestSha256(t *testing.T) {
 	if hashes := Detect("127e6fbfe24a750e72930c220a8e138275656b8e5d8f48a98c3c92df2caba935"); !checkIncludedHash(hashes, "SHA-256") {
 		t.Errorf("Expected SHA-256, got %v", hashes)
@@ -24,3 +26,10 @@ func TestGRUB2(t *testing.T) {
 		t.Errorf("Expected GRUB2, got %v", hashes)
 	}
 }
+
+// TODO: i really can't find an example hash for this, maybe someone else can?
+// func TestMSTSC(t *testing.T) {
+// 	if hashes := Detect(""); !checkIncludedHash(hashes, "MSTSC") {
+// 		t.Errorf("Expected MSTSC, got %v", hashes)
+// 	}
+// }
