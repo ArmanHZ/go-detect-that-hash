@@ -60,6 +60,23 @@ Cisco Type 7                        N/A         N/A                   true
 BigCrypt                            N/A         bigcrypt              true
 ```
 
+# Usage as a library
+
+```go
+package main
+
+import (
+  "fmt"
+
+  gdth "github.com/ArmanHZ/go-detect-that-hash"
+)
+
+func main() {
+  results := gdth.Detect("127e6fbfe24a750e72930c220a8e138275656b8e5d8f48a98c3c92df2caba935")
+  fmt.Println(results)
+}
+```
+
 # TODO
 - Add easy install via Go cmd tool
 - Cleanup the code and fix some bugs (never ending task)
