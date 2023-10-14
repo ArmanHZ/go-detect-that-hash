@@ -4,6 +4,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type HashInfo struct {
@@ -20,17 +21,20 @@ type Prototype struct {
 }
 
 var (
-	regexPool = make(map[string]*regexp.Regexp)
+	regexPool = sync.Map{}
 )
 
 // does some simple regex pooling and checks if the input string matches the provided regex.
 // will add the regex to the regex pool if it doesn't exist yet.
 func checkRegex(regex, input string) bool {
 	// we don't want to compile the regex for every comparison, so lazily compile it and store it in a map
-	rexp, ok := regexPool[regex]
+	var rexp *regexp.Regexp
+	val, ok := regexPool.Load(regex)
 	if !ok {
 		rexp = regexp.MustCompile(regex)
-		regexPool[regex] = rexp
+		regexPool.Store(regex, rexp)
+	} else {
+		rexp = val.(*regexp.Regexp)
 	}
 
 	return rexp.MatchString(input)
