@@ -78,14 +78,15 @@ func main() {
 ```
 
 # TODO
-- Add easy install via Go cmd tool
-- Cleanup the code and fix some bugs (never ending task)
-- Prettier output and colors using custom table printing functions
-- Add command line argument parser
-- Let the user to print only certain columns of the output. E.g. Name only
-- Unit testing
+- [ ] Flag for `csv` output for potentially piping the output with other tools
+- [ ] Add easy install via Go cmd tool
+- [ ] Cleanup the code and fix some bugs (never ending task)
+- [ ] Prettier output and colors using custom table printing functions
+- [ ] Add command line argument parser
+- [ ] Let the user to print only certain columns of the output. E.g. Name only
+- [ ] Unit testing
 ### Later down the line stuff
-- Print out analysis and sort the output by the likelyhood of the algorithm used in hashing
+- [ ] Print out analysis and sort the output by the likelyhood of the algorithm used in hashing
 
 **Open to recommendations for features. You can open an Issue**
 
