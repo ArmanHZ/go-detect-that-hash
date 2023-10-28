@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"text/tabwriter"
 
 	gdth "github.com/ArmanHZ/go-detect-that-hash"
 )
@@ -13,8 +12,5 @@ func main() {
 	inputHash := os.Args[1]
 	results := gdth.Detect(inputHash)
 
-	tabWritter := tabwriter.NewWriter(os.Stdout, 0, 0, 8, ' ', 0)
-	defer tabWritter.Flush()
-
-	gdth.PrintHashes(tabWritter, results)
+	gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"}, 40, 10, 15, 12)
 }

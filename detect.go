@@ -2,7 +2,8 @@ package gdth
 
 import (
 	"fmt"
-	"text/tabwriter"
+	"strconv"
+	"strings"
 )
 
 // Idk, I'll look at a way of doing Enum or Struct. This looks ugly lol
@@ -13,28 +14,60 @@ const (
 	Color_green = "\033[32m"
 )
 
-// TODO prettier formatting for the table
-// TODO maybe we should create a print table file or have functions to do so
-func PrintHash(tabWritter *tabwriter.Writer, hashInfo HashInfo) {
-	fmt.Fprintf(tabWritter, Color_green+"%s\t"+Color_reset, hashInfo.Name)
-	if hashInfo.Hashcat != -1 {
-		fmt.Fprintf(tabWritter, Color_green+"%d\t"+Color_reset, hashInfo.Hashcat)
-	} else {
-		fmt.Fprintf(tabWritter, Color_red+"N/A\t"+Color_reset)
+func printTableLine(paddings ...int) string {
+	sum := 0
+	for _, v := range paddings {
+		sum += v
 	}
-	if hashInfo.John == "" {
-		fmt.Fprintf(tabWritter, Color_red+"N/A\t"+Color_reset)
+	result := strings.Repeat("-", sum)
+	if sum%2 == 0 {
+		result += strings.Repeat("-", 8)
 	} else {
-		fmt.Fprintf(tabWritter, Color_green+"%s\t"+Color_reset, hashInfo.John)
+		result += strings.Repeat("-", 7)
 	}
-	fmt.Fprintf(tabWritter, Color_green+"%t\n"+Color_reset, hashInfo.Extended)
+	return result + "+"
 }
 
-func PrintHashes(tabWritter *tabwriter.Writer, hashInfo []HashInfo) {
-	fmt.Fprintln(tabWritter, Color_cyan+"Name\tHashCat\tJohn\tIs extended"+Color_reset)
-	for _, hash := range hashInfo {
-		PrintHash(tabWritter, hash)
+// Text will be in the middle
+func prepareTableItem(item string, padding int) string {
+	paddingToApply := (padding - len(item))
+	result := ""
+	if paddingToApply%2 != 0 {
+		result += " "
 	}
+	result += strings.Repeat(" ", paddingToApply/2) + item + strings.Repeat(" ", paddingToApply/2) + " |"
+	return result
+}
+
+func PrintTable(hashes []HashInfo, headers []string, paddings ...int) {
+	fmt.Println(printTableLine(paddings...))
+
+	fmt.Print(prepareTableItem(headers[0], paddings[0]))
+	fmt.Print(prepareTableItem(headers[1], paddings[1]))
+	fmt.Print(prepareTableItem(headers[2], paddings[2]))
+	fmt.Println(prepareTableItem(headers[3], paddings[3]))
+
+	fmt.Println(printTableLine(paddings...))
+	for _, v := range hashes {
+		fmt.Print(prepareTableItem(v.Name, paddings[0]))
+		if v.Hashcat == -1 {
+			fmt.Print(prepareTableItem("N/A", paddings[1]))
+		} else {
+			fmt.Print(prepareTableItem(strconv.Itoa(v.Hashcat), paddings[1]))
+		}
+		if v.John == "" {
+			fmt.Print(prepareTableItem("N/A", paddings[2]))
+		} else {
+			fmt.Print(prepareTableItem(v.John, paddings[2]))
+		}
+		if v.Extended {
+			fmt.Print(prepareTableItem("True", paddings[3]))
+		} else {
+			fmt.Print(prepareTableItem("False", paddings[3]))
+		}
+		fmt.Println()
+	}
+	fmt.Println(printTableLine(paddings...))
 }
 
 // returns a slice of possible hashes

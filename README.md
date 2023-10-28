@@ -39,25 +39,28 @@ echo 'gdth' | sha256sum
 ./gdth 8e821b2c108e821b2c107564180e6bef9fdd2005a5f0a9c8b9c4e674433ab05232a34e2bf6
 
 # Out
-Name                                HashCat     John                  Is extended
-Snefru-256                          N/A         snefru-256            false
-SHA-256                             1400        raw-sha256            false
-RIPEMD-256                          N/A         N/A                   false
-Haval-256                           N/A         haval-256-3           false
-GOST R 34.11-94                     6900        gost                  false
-GOST CryptoPro S-Box                N/A         N/A                   false
-SHA3-256                            5000        raw-keccak-256        false
-Skein-256                           N/A         skein-256             false
-Skein-512(256)                      N/A         N/A                   false
-Ventrilo                            N/A         N/A                   true
-sha256($pass.$salt)                 1410        N/A                   true
-sha256($salt.$pass)                 1420        N/A                   true
-sha256(unicode($pass).$salt)        1430        N/A                   true
-sha256($salt.unicode($pass))        1440        N/A                   true
-HMAC-SHA256 (key = $pass)           1450        hmac-sha256           true
-HMAC-SHA256 (key = $salt)           1460        hmac-sha256           true
-Cisco Type 7                        N/A         N/A                   true
-BigCrypt                            N/A         bigcrypt              true
+------------------------------------------------------------------------------------+
+                  Name                   |  HashCat  |      John      |  Extended?  |
+------------------------------------------------------------------------------------+
+               Snefru-256                |    N/A    |   snefru-256   |    False    |
+                 SHA-256                 |   1400    |   raw-sha256   |    False    |
+               RIPEMD-256                |    N/A    |      N/A       |    False    |
+                Haval-256                |    N/A    |  haval-256-3   |    False    |
+             GOST R 34.11-94             |   6900    |      gost      |    False    |
+          GOST CryptoPro S-Box           |    N/A    |      N/A       |    False    |
+                SHA3-256                 |   5000    | raw-keccak-256 |    False    |
+                Skein-256                |    N/A    |   skein-256    |    False    |
+             Skein-512(256)              |    N/A    |      N/A       |    False    |
+                Ventrilo                 |    N/A    |      N/A       |    True     |
+           sha256($pass.$salt)           |   1410    |      N/A       |    True     |
+           sha256($salt.$pass)           |   1420    |      N/A       |    True     |
+      sha256(unicode($pass).$salt)       |   1430    |      N/A       |    True     |
+      sha256($salt.unicode($pass))       |   1440    |      N/A       |    True     |
+        HMAC-SHA256 (key = $pass)        |   1450    |  hmac-sha256   |    True     |
+        HMAC-SHA256 (key = $salt)        |   1460    |  hmac-sha256   |    True     |
+              Cisco Type 7               |    N/A    |      N/A       |    True     |
+                BigCrypt                 |    N/A    |    bigcrypt    |    True     |
+------------------------------------------------------------------------------------+
 ```
 
 # Usage as a library
