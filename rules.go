@@ -40,7 +40,8 @@ func checkRegex(regex, input string) bool {
 	return rexp.MatchString(input)
 }
 
-func checkAlphaNumeric(input string) bool {
+// checks input string for lowercase alphanumeric characters
+func checkAlphaNumericLower(input string) bool {
 	for _, char := range input {
 		if !((char >= '0' && char <= '9') || (char >= 'a' && char <= 'f')) {
 			return false
@@ -726,7 +727,7 @@ var (
 					return false
 				}
 
-				if !checkAlphaNumeric(saltPart) {
+				if !checkAlphaNumericLower(saltPart) {
 					return false
 				}
 
@@ -735,7 +736,7 @@ var (
 					return false
 				}
 
-				if !checkAlphaNumeric(hashPart) {
+				if !checkAlphaNumericLower(hashPart) {
 					return false
 				}
 
@@ -839,14 +840,7 @@ var (
 					return false
 				}
 
-				// match for alphanumeric characters
-				for _, char := range input {
-					if char < 'a' || (char > 'f' && char < '0') || char > '9' {
-						return false
-					}
-				}
-
-				return true
+				return checkAlphaNumericLower(input)
 			},
 			mode: []HashInfo{
 				{"Microsoft MSTSC(RDP-File)", -1, "", false},
