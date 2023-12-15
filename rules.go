@@ -380,7 +380,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\*[a-f0-9]{40}$`, input)
+				return checkRegex(`^[a-f0-9]{40}$`, input)
 			},
 			mode: []HashInfo{
 				{"MySQL5.x", 300, "mysql-sha1", false},
