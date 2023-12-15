@@ -275,7 +275,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$H\$[a-z0-9\/.]{31}$`, input)
+				return checkRegex(`^\$H\$[a-zA-Z0-9]{30}\.$`, input)
 			},
 			mode: []HashInfo{
 				{"phpBB v3.x", 400, "phpass", false},
@@ -285,7 +285,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$P\$[a-z0-9\/.]{31}$`, input)
+				return checkRegex(`^\$P\$[a-zA-Z0-9]{30}\.$`, input)
 			},
 			mode: []HashInfo{
 				{"Wordpress ≥ v2.6.2", 400, "phpass", false},
