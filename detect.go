@@ -82,3 +82,14 @@ func Detect(hash string) []HashInfo {
 
 	return hashes
 }
+
+func IsSupported(hashcatID int) bool {
+	for _, proto := range prototypes {
+		for _, mode := range proto.mode {
+			if mode.Hashcat == hashcatID {
+				return true
+			}
+		}
+	}
+	return false
+}
