@@ -27,11 +27,13 @@ var (
 )
 
 const (
-	prologue = `package gdth_test
+	prologue = `package gdth_test // file generated via testgen/generate_tests.go
 
 import (
 	"testing"
+
 	gdth "github.com/ArmanHZ/go-detect-that-hash"
+	"github.com/matryer/is"
 )
 
 func checkIncludedHashID(hashes []gdth.HashInfo, hashcatID int) bool {
@@ -41,8 +43,7 @@ func checkIncludedHashID(hashes []gdth.HashInfo, hashcatID int) bool {
 		}
 	}
 	return false
-}
-`
+}`
 )
 
 // replace all non-alphanumeric characters with an underscore
@@ -117,10 +118,10 @@ func main() {
 		}
 
 		// build test function
-		fmt.Printf("func Test%s(t *testing.T) {\n", testName)
-		fmt.Printf("\tif hashes := gdth.Detect(\"%s\"); !checkIncludedHashID(hashes, %s) {\n", hash, hashcatID)
-		fmt.Printf("\t\tt.Errorf(\"Expected %s, got %%v\", hashes)\n", name)
-		fmt.Printf("\t}\n")
-		fmt.Printf("}\n\n")
+		fmt.Printf("\nfunc Test%s(t *testing.T) {\n", testName)
+		fmt.Printf("\tis := is.New(t)\n")
+		fmt.Printf("\thashes := gdth.Detect(\"%s\")\n", hash)
+		fmt.Printf("\tis.True(checkIncludedHashID(hashes, %s)) // Should find %s in hashes\n", hashcatID, name)
+		fmt.Printf("}\n")
 	}
 }
