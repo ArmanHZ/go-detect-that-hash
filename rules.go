@@ -119,7 +119,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`(?i)^[a-f0-9]{16}$`, input)
+				return checkRegex(`^[a-f0-9]{16}$`, input)
 			},
 			mode: []HashInfo{
 				{"MySQL323", 200, "mysql", false},
@@ -132,7 +132,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`(?i)^[a-z0-9\/.]{16}$`, input)
+				return checkRegex(`^[a-z0-9\/.]{16}$`, input)
 			},
 			mode: []HashInfo{
 				{"Cisco-PIX(MD5)", 2400, "pix-md5", false},
