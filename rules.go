@@ -131,7 +131,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^[a-z0-9\/.]{16}$`, input)
+				return checkRegex(`^[a-zA-Z0-9\/.]{16}$`, input)
 			},
 			mode: []HashInfo{
 				{"Cisco-PIX(MD5)", 2400, "pix-md5", false},
@@ -952,7 +952,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^[a-z0-9\/.]{16}([:$].{1,})?$`, input)
+				return checkRegex(`^[a-zA-Z0-9\/.]{16}([:$].{1,})?$`, input)
 			},
 			mode: []HashInfo{
 				{"Cisco-ASA(MD5)", 2410, "asa-md5", false},
