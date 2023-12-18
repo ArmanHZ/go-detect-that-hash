@@ -216,6 +216,14 @@ var (
 		},
 		{
 			match: func(input string) bool {
+				return checkRegex(`^[a-f0-9]{16}(:.+)?$`, input)
+			},
+			mode: []HashInfo{
+				{"LM", 3000, "lm", false},
+			},
+		},
+		{
+			match: func(input string) bool {
 				return checkRegex(`^(\$snefru\$)?[a-f0-9]{32}$`, input)
 			},
 			mode: []HashInfo{
