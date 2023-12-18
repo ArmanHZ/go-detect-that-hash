@@ -257,7 +257,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$1\$[a-z0-9\/.]{0,8}\$[a-z0-9\/.]{22}(:.*)?$`, input)
+				return checkRegex(`^\$1\$[a-zA-Z0-9\/.]{0,8}\$[a-zA-Z0-9\/.]{22}(:.*)?$`, input)
 			},
 			mode: []HashInfo{
 				{"MD5 Crypt", 500, "md5crypt", false},
