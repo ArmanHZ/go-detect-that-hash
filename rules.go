@@ -31,7 +31,8 @@ func checkRegex(regex, input string) bool {
 	var rexp *regexp.Regexp
 	val, ok := regexPool.Load(regex)
 	if !ok {
-		rexp = regexp.MustCompile(regex)
+		// we also set the case-insensitive flag here
+		rexp = regexp.MustCompile("(?i)" + regex)
 		regexPool.Store(regex, rexp)
 	} else {
 		rexp = val.(*regexp.Regexp)
@@ -108,7 +109,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^[a-zA-Z0-9\/.]{13}$`, input)
+				return checkRegex(`^[a-z0-9\/.]{13}$`, input)
 			},
 			mode: []HashInfo{
 				{"DES(Unix)", 1500, "descrypt", false},
@@ -118,7 +119,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^[a-f0-9]{16}$`, input)
+				return checkRegex(`(?i)^[a-f0-9]{16}$`, input)
 			},
 			mode: []HashInfo{
 				{"MySQL323", 200, "mysql", false},
@@ -131,7 +132,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^[a-zA-Z0-9\/.]{16}$`, input)
+				return checkRegex(`(?i)^[a-z0-9\/.]{16}$`, input)
 			},
 			mode: []HashInfo{
 				{"Cisco-PIX(MD5)", 2400, "pix-md5", false},
@@ -265,7 +266,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$1\$[a-zA-Z0-9\/.]{0,8}\$[a-zA-Z0-9\/.]{22}(:.*)?$`, input)
+				return checkRegex(`^\$1\$[a-z0-9\/.]{0,8}\$[a-z0-9\/.]{22}(:.*)?$`, input)
 			},
 			mode: []HashInfo{
 				{"MD5 Crypt", 500, "md5crypt", false},
@@ -283,7 +284,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$H\$[a-zA-Z0-9]{30}\.$`, input)
+				return checkRegex(`^\$H\$[a-z0-9]{30}\.$`, input)
 			},
 			mode: []HashInfo{
 				{"phpBB v3.x", 400, "phpass", false},
@@ -293,7 +294,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$P\$[a-zA-Z0-9]{30}\.$`, input)
+				return checkRegex(`^\$P\$[a-z0-9]{30}\.$`, input)
 			},
 			mode: []HashInfo{
 				{"Wordpress ≥ v2.6.2", 400, "phpass", false},
@@ -312,7 +313,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$apr1\$[a-zA-Z0-9\/.]{0,8}\$[a-zA-Z0-9\/.]{22}$`, input)
+				return checkRegex(`^\$apr1\$[a-z0-9\/.]{0,8}\$[a-z0-9\/.]{22}$`, input)
 			},
 			mode: []HashInfo{
 				{"MD5(APR)", 1600, "", false},
@@ -796,7 +797,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$6\$(rounds=[0-9]+\$)?[a-zA-Z0-9\/.]{0,16}\$[a-zA-Z0-9\/.]{86}$`, input)
+				return checkRegex(`^\$6\$(rounds=[0-9]+\$)?[a-z0-9\/.]{0,16}\$[a-z0-9\/.]{86}$`, input)
 			},
 			mode: []HashInfo{
 				{"SHA-512 Crypt", 1800, "sha512crypt", false},
@@ -960,7 +961,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^[a-zA-Z0-9\/.]{16}([:$].{1,})?$`, input)
+				return checkRegex(`^[a-z0-9\/.]{16}([:$].{1,})?$`, input)
 			},
 			mode: []HashInfo{
 				{"Cisco-ASA(MD5)", 2410, "asa-md5", false},
