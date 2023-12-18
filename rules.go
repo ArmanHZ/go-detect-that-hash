@@ -788,7 +788,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$6\$(rounds=[0-9]+\$)?[a-z0-9\/.]{0,16}\$[a-z0-9\/.]{86}$`, input)
+				return checkRegex(`^\$6\$(rounds=[0-9]+\$)?[a-zA-Z0-9\/.]{0,16}\$[a-zA-Z0-9\/.]{86}$`, input)
 			},
 			mode: []HashInfo{
 				{"SHA-512 Crypt", 1800, "sha512crypt", false},
