@@ -108,7 +108,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^[a-z0-9\/.]{13}$`, input)
+				return checkRegex(`^[a-zA-Z0-9\/.]{13}$`, input)
 			},
 			mode: []HashInfo{
 				{"DES(Unix)", 1500, "descrypt", false},
