@@ -304,7 +304,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^\$apr1\$[a-z0-9\/.]{0,8}\$[a-z0-9\/.]{22}$`, input)
+				return checkRegex(`^\$apr1\$[a-zA-Z0-9\/.]{0,8}\$[a-zA-Z0-9\/.]{22}$`, input)
 			},
 			mode: []HashInfo{
 				{"MD5(APR)", 1600, "", false},
