@@ -563,7 +563,6 @@ var (
 				{"Haval-256", -1, "haval-256-3", false},
 				{"GOST R 34.11-94", 6900, "gost", false},
 				{"GOST CryptoPro S-Box", -1, "", false},
-				{"SHA3-256", 5000, "raw-keccak-256", false},
 				{"Skein-256", -1, "skein-256", false},
 				{"Skein-512(256)", -1, "", false},
 				{"Ventrilo", -1, "", true},

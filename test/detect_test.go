@@ -358,12 +358,6 @@ func TestISCSI_CHAP_AUTHENTICATION__MD5_CHAP__7(t *testing.T) {
 	is.True(checkIncludedHashID(hashes, 4800)) // Should find iSCSI CHAP authentication, MD5(CHAP) 7 in hashes
 }
 
-func TestSHA1_SHA1__SALT__PASS__SALT__(t *testing.T) {
-	is := is.New(t)
-	hashes := gdth.Detect("05ac0c544060af48f993f9c3cdf2fc03937ea35b:232725102020")
-	is.True(checkIncludedHashID(hashes, 5000)) // Should find sha1(sha1($salt.$pass.$salt)) in hashes
-}
-
 func TestHALF_MD5(t *testing.T) {
 	is := is.New(t)
 	hashes := gdth.Detect("8743b52063cd8409")
