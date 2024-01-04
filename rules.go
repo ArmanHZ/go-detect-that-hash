@@ -1263,6 +1263,13 @@ var (
 			mode: []HashInfo{
 				{"Microsoft Office ≤ 2003 (MD5+RC4)", 9700, "oldoffice", false},
 				{"Microsoft Office ≤ 2003 (MD5+RC4) collider-mode #1", 9710, "oldoffice", false},
+			},
+		},
+		{
+			match: func(input string) bool {
+				return checkRegex(`^\$oldoffice\$[01]\*[a-f0-9]{32}\*[a-f0-9]{32}\*[a-f0-9]{32}:[a-f0-9]{10}$`, input)
+			},
+			mode: []HashInfo{
 				{"Microsoft Office ≤ 2003 (MD5+RC4) collider-mode #2", 9720, "oldoffice", false},
 			},
 		},
