@@ -1381,7 +1381,7 @@ var (
 		},
 		{
 			match: func(input string) bool {
-				return checkRegex(`^sha256[:$][0-9]+[:$][a-z0-9\/+]+[:$][a-z0-9\/+]{32,128}$`, input)
+				return checkRegex(`^sha256:\d+:[A-Za-z0-9+/=]+:[A-Za-z0-9+/=]+$`, input)
 			},
 			mode: []HashInfo{
 				{"PBKDF2-HMAC-SHA256(PHP)", 10900, "", false},
