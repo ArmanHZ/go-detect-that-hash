@@ -125,9 +125,16 @@ var (
 				{"MySQL323", 200, "mysql", false},
 				{"DES(Oracle)", 3100, "", false},
 				{"Half MD5", 5100, "", false},
-				{"Oracle 7-10g", 3100, "", false},
 				{"FNV-164", -1, "", false},
 				{"CRC-64", -1, "", false},
+			},
+		},
+		{
+			match: func(input string) bool {
+				return checkRegex(`^[a-f0-9]{16}:[0-9]{10}$`, input)
+			},
+			mode: []HashInfo{
+				{"Oracle 7-10g", 3100, "", false},
 			},
 		},
 		{
