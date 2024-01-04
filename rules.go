@@ -1285,6 +1285,14 @@ var (
 		},
 		{
 			match: func(input string) bool {
+				return checkRegex(`^\$oldoffice\$[34]\*[a-f0-9]{32}\*[a-f0-9]{32}\*[a-f0-9]{40}:[a-f0-9]{10}$`, input)
+			},
+			mode: []HashInfo{
+				{"Microsoft Office ≤ 2003 (SHA1+RC4) collider-mode #2", 9820, "", false},
+			},
+		},
+		{
+			match: func(input string) bool {
 				return checkRegex(`^(\$radmin2\$)?[a-f0-9]{32}$`, input)
 			},
 			mode: []HashInfo{
