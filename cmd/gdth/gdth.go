@@ -12,5 +12,5 @@ func main() {
 	inputHash := os.Args[1]
 	results := gdth.Detect(inputHash)
 
-	gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"}, 40, 10, 15, 12)
+	gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"}, 40, 10, 20, 12)
 }
