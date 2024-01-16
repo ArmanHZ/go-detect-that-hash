@@ -6,6 +6,21 @@ You input a hash string and it will output the potential algorithm(s) used when 
 # Why?
 Most of the popular hash detection/identifier tools are written in Python. So, we wanted to take a different approach and write it in Go!
 
+# Installation
+To install the `gdth` tool:
+
+```bash
+go install github.com/ArmanHZ/go-detect-that-hash/cmd/gdth@latest
+```
+
+To install the repository as a module:
+
+```bash
+go install github.com/ArmanHZ/go-detect-that-hash@latest
+```
+
+You can also change the `latest` part above to install any specific version you want. E.g. `v1.0.1`.
+
 # Usage
 We currently don't have a `-h` support, but we will add it sometime soon™
 
@@ -82,12 +97,12 @@ func main() {
 
 # TODO
 - [ ] Flag for `csv` output for potentially piping the output with other tools
-- [ ] Add easy install via Go cmd tool
+- [x] ~~Add easy install via Go cmd tool~~
 - [ ] Cleanup the code and fix some bugs (never ending task)
 - [ ] Prettier output and colors using custom table printing functions
 - [ ] Add command line argument parser
 - [ ] Let the user to print only certain columns of the output. E.g. Name only
-- [ ] Unit testing
+- [x] ~~Unit testing~~
 ### Later down the line stuff
 - [ ] Print out analysis and sort the output by the likelyhood of the algorithm used in hashing
 
