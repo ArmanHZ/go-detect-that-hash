@@ -70,6 +70,31 @@ func PrintTable(hashes []HashInfo, headers []string, paddings ...int) {
 	fmt.Println(printTableLine(paddings...))
 }
 
+func PrintCSV(hashes []HashInfo) {
+	fmt.Println("Name,HashCat,John,Extended")
+	for _, v := range hashes {
+		fmt.Print(v.Name + ",")
+
+		if v.Hashcat == -1 {
+			fmt.Print("N/A,")
+		} else {
+			fmt.Print(strconv.Itoa(v.Hashcat) + ",")
+		}
+
+		if v.John == "" {
+			fmt.Print("N/A,")
+		} else {
+			fmt.Print(v.John + ",")
+		}
+
+		if v.Extended {
+			fmt.Println("True")
+		} else {
+			fmt.Println("False")
+		}
+	}
+}
+
 // returns a slice of possible hashes
 func Detect(hash string) []HashInfo {
 	var hashes []HashInfo

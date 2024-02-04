@@ -1,7 +1,7 @@
 package main
 
 import (
-	"os"
+	"flag"
 
 	gdth "github.com/ArmanHZ/go-detect-that-hash"
 )
@@ -9,8 +9,16 @@ import (
 func main() {
 	// TODO input to lowercase. Must research if there are any case sensitive hashes first tho.
 	// For testing. Extra checks later.
-	inputHash := os.Args[1]
+	outputMode := flag.String("format", "table", "Output mode. Options: table, csv")
+	flag.Parse()
+
+	inputHash := flag.Arg(0)
 	results := gdth.Detect(inputHash)
 
-	gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"}, 40, 10, 20, 12)
+	switch *outputMode {
+	case "csv":
+		gdth.PrintCSV(results)
+	default:
+		gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"}, 40, 10, 20, 12)
+	}
 }
