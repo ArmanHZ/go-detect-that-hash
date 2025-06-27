@@ -80,7 +80,7 @@ var (
 				{"Fletcher-32", -1, "", false},
 				{"Joaat", -1, "", false},
 				{"ELF-32", -1, "", false},
-				{"XOR-32", -1, "", false},
+				{"XOR-32", -1, "", false}, {"Murmur-32", -1, "", false},
 			},
 		},
 		{
@@ -125,8 +125,9 @@ var (
 				{"MySQL323", 200, "mysql", false},
 				{"DES(Oracle)", 3100, "", false},
 				{"Half MD5", 5100, "", false},
-				{"FNV-164", -1, "", false},
+				{"FNV-1-64", -1, "", false},
 				{"CRC-64", -1, "", false},
+     {"FNV-1a-64", -1, "", false},
 			},
 		},
 		{
@@ -197,6 +198,7 @@ var (
 				{"RIPEMD-128", -1, "ripemd-128", false},
 				{"Haval-128", -1, "haval-128-4", false},
 				{"Tiger-128", -1, "", false},
+     {"Tiger-128-3", -1, "", false},
 				{"Skein-256(128)", -1, "", false},
 				{"Skein-512(128)", -1, "", false},
 				{"Lotus Notes/Domino 5", 8600, "lotus5", false},
