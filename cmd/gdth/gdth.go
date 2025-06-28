@@ -12,6 +12,11 @@ func main() {
 	outputMode := flag.String("format", "table", "Output mode. Options: table, csv")
 	flag.Parse()
 
+	     if flag.NArg() < 1{
+     	flag.Usage()
+     	os.Exit(1)
+     }
+	
 	inputHash := flag.Arg(0)
 	results := gdth.Detect(inputHash)
 
