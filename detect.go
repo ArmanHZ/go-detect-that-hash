@@ -39,33 +39,51 @@ func prepareTableItem(item string, padding int) string {
 	return result
 }
 
-func PrintTable(hashes []HashInfo, headers []string, paddings ...int) {
+func PrintTable(hashes []HashInfo, headers []string, paddings ... int) {
 	fmt.Println(printTableLine(paddings...))
 
-	fmt.Print(prepareTableItem(headers[0], paddings[0]))
-	fmt.Print(prepareTableItem(headers[1], paddings[1]))
-	fmt.Print(prepareTableItem(headers[2], paddings[2]))
-	fmt.Println(prepareTableItem(headers[3], paddings[3]))
+
+	for numHead, _ := range headers{
+		fmt.Print(prepareTableItem(headers[numHead], paddings[numHead]))
+	}
 
 	fmt.Println(printTableLine(paddings...))
+
+ 
 	for _, v := range hashes {
-		fmt.Print(prepareTableItem(v.Name, paddings[0]))
+	for numHead, head := range headers {
+    head := strings.ToLower(head) 
+	switch head{
+		case "name":
+		fmt.Print(prepareTableItem(v.Name, paddings[numHead]))
+
+		case "hashcat":
 		if v.Hashcat == -1 {
-			fmt.Print(prepareTableItem("N/A", paddings[1]))
+			fmt.Print(prepareTableItem("N/A", paddings[numHead]))
 		} else {
-			fmt.Print(prepareTableItem(strconv.Itoa(v.Hashcat), paddings[1]))
-		}
-		if v.John == "" {
-			fmt.Print(prepareTableItem("N/A", paddings[2]))
-		} else {
-			fmt.Print(prepareTableItem(v.John, paddings[2]))
-		}
-		if v.Extended {
-			fmt.Print(prepareTableItem("True", paddings[3]))
-		} else {
-			fmt.Print(prepareTableItem("False", paddings[3]))
-		}
-		fmt.Println()
+			fmt.Print(prepareTableItem(strconv.Itoa(v.Hashcat), paddings[numHead]))
+			}
+
+	   case "john":
+	   if v.John == "" {
+	   	fmt.Print(prepareTableItem("N/A", paddings[numHead]))
+	   } else {
+	   	fmt.Print(prepareTableItem(v.John, paddings[numHead]))
+	   }
+
+	   case "extended":
+	   if v.Extended {
+	   			fmt.Print(prepareTableItem("True", paddings[numHead]))
+	   		} else {
+	   			fmt.Print(prepareTableItem("False", paddings[numHead]))
+	   		}
+
+	   default:
+	   fmt.Print(prepareTableItem("", paddings[numHead]))
+
+	}
+    }
+	fmt.Println()
 	}
 	fmt.Println(printTableLine(paddings...))
 }
