@@ -39,35 +39,74 @@ func prepareTableItem(item string, padding int) string {
 	return result
 }
 
-func PrintTable(hashes []HashInfo, headers []string, paddings ...int) {
-	fmt.Println(printTableLine(paddings...))
+func getGreatestLength(header string, words []string) int {
+	maxLen := len(header)
+		for _, word := range words {
+			if len(word) > maxLen {
+				maxLen = len(word)
+			}
+		}
+		return maxLen+2
+}
 
-	fmt.Print(prepareTableItem(headers[0], paddings[0]))
-	fmt.Print(prepareTableItem(headers[1], paddings[1]))
-	fmt.Print(prepareTableItem(headers[2], paddings[2]))
-	fmt.Println(prepareTableItem(headers[3], paddings[3]))
 
-	fmt.Println(printTableLine(paddings...))
+func sortDetectSlice(results []HashInfo) ([]string, []string, []string, []string) {
+	//return all as slice of strings so that GetMaxLength will be readable and maintainable
+	var name, john, hashcat, extended []string
+	for _, v := range results {
+		strHC := strconv.Itoa(v.Hashcat)
+		strExtd := strconv.FormatBool(v.Extended)
+		name = append(name, v.Name)
+		hashcat = append(hashcat, strHC)
+		john = append(john, v.John)
+		extended = append(extended, strExtd)
+	}
+	return name, hashcat, john, extended
+}
+// Column width should be generated programatically, get padding from value with greatest length
+// Static column width (provided by dev) is prone to panic "panic: strings: negative Repeat count" when length of an item
+// is greater than provided static length. Forcing dev to give a higher upper limit column length, where mostly that much
+//space is not needed
+
+func PrintTable(hashes []HashInfo, headers []string) {
+	nameSlice, hcSlice, johnSlice, extendedSlice := sortDetectSlice(hashes)
+	nameLen := getGreatestLength(headers[0], nameSlice)
+	hashcatLen := getGreatestLength(headers[1], hcSlice)
+	johnLen := getGreatestLength(headers[2], johnSlice)
+	extendedLen := getGreatestLength(headers[3], extendedSlice)
+	tableLine := printTableLine(nameLen+hashcatLen+johnLen+extendedLen)
+
+	// fmt.Println(printTableLine(paddings...))
+	fmt.Println(tableLine)
+
+	fmt.Print(prepareTableItem(headers[0], nameLen))
+	fmt.Print(prepareTableItem(headers[1], hashcatLen))
+	fmt.Print(prepareTableItem(headers[2], johnLen))
+	fmt.Println(prepareTableItem(headers[3], extendedLen))
+
+	//fmt.Println(printTableLine(paddings...))
+	fmt.Println(tableLine)
+
 	for _, v := range hashes {
-		fmt.Print(prepareTableItem(v.Name, paddings[0]))
+		fmt.Print(prepareTableItem(v.Name, nameLen))
 		if v.Hashcat == -1 {
-			fmt.Print(prepareTableItem("N/A", paddings[1]))
+			fmt.Print(prepareTableItem("N/A", hashcatLen))
 		} else {
-			fmt.Print(prepareTableItem(strconv.Itoa(v.Hashcat), paddings[1]))
+			fmt.Print(prepareTableItem(strconv.Itoa(v.Hashcat), hashcatLen))
 		}
 		if v.John == "" {
-			fmt.Print(prepareTableItem("N/A", paddings[2]))
+			fmt.Print(prepareTableItem("N/A", johnLen))
 		} else {
-			fmt.Print(prepareTableItem(v.John, paddings[2]))
+			fmt.Print(prepareTableItem(v.John, johnLen))
 		}
 		if v.Extended {
-			fmt.Print(prepareTableItem("True", paddings[3]))
+			fmt.Print(prepareTableItem("True", extendedLen))
 		} else {
-			fmt.Print(prepareTableItem("False", paddings[3]))
+			fmt.Print(prepareTableItem("False", extendedLen))
 		}
 		fmt.Println()
 	}
-	fmt.Println(printTableLine(paddings...))
+	fmt.Println(tableLine)
 }
 
 func PrintCSV(hashes []HashInfo) {

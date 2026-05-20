@@ -54,19 +54,19 @@ func main() {
 				fmt.Printf("\nHash: %s\n", hash)
 				gdth.PrintCSV(results)
 			default:
-				fmt.Printf("\nHash: %s\n", hash)
-				gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"}, 40, 10, 20, 12)
+				fmt.Printf("\nHash: %s\n", hash)				 
+				gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"})
 			}
 		}
 	} else {
 		inputHash := flag.Arg(0)
 		results := gdth.Detect(inputHash)
-
+		
 		switch *outputMode {
 		case "csv":
 			gdth.PrintCSV(results)
 		default:
-			gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"}, 40, 10, 20, 12)
+			gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"})
 		}
 	}
 
