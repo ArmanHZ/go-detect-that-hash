@@ -22,19 +22,31 @@ go install github.com/ArmanHZ/go-detect-that-hash@latest
 You can also change the `latest` part above to install any specific version you want. E.g. `v1.0.1`.
 
 # Usage
-We currently don't have a `-h` support, but we will add it sometime soon™
-
-In the meantime, to build the project:
 
 ```bash
+# To build the project manually
 git pull https://github.com/ArmanHZ/go-detect-that-hash
 go build cmd/gdth/gdth.go
+```
 
-# After building
-./gdth <input_hash>
+```bash
+# Display help/usage
+gdth -h
+Usage of ./gdth:
+  -file string
+        Read hashes from a file
+  -format string
+        Output mode. Options: table, csv (default "table")
 
-# Alternatively, without building
-go run cmd/gdth/gdth.go <input_hash>
+# Detecting single hash
+gdth <input_hash>
+
+# Change the display format to csv (default is table)
+gdth -format csv <input_hash>
+
+# Read hashes from a file (also works with the format flag)
+gdth -file <path_to_file>
+gdth -format csv -file <path_to_file>
 ```
 
 The output has 4 fields:
@@ -96,11 +108,11 @@ func main() {
 ```
 
 # TODO
-- [ ] Flag for `csv` output for potentially piping the output with other tools
+- [x] ~~Flag for `csv` output for potentially piping the output with other tools~~
 - [x] ~~Add easy install via Go cmd tool~~
 - [ ] Cleanup the code and fix some bugs (never ending task)
 - [ ] Prettier output and colors using custom table printing functions
-- [ ] Add command line argument parser
+- [x] ~~Add command line argument parser~~
 - [ ] Let the user to print only certain columns of the output. E.g. Name only
 - [x] ~~Unit testing~~
 ### Later down the line stuff
