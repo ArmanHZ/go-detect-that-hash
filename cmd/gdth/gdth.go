@@ -36,16 +36,25 @@ func main() {
 	// TODO input to lowercase. Must research if there are any case sensitive hashes first tho.
 	// For testing. Extra checks later.
 	outputMode := flag.String("format", "table", "Output mode. Options: table, csv")
-	var fileName string
-	flag.StringVar(&fileName, "file", "", "Read hashes from a file")
 
 	flag.Parse()
 
-	// FIXME: Code repetition here looks ugly. The fix would be to have another
-	// detect function that takes a list of hashes, but that requires the print
-	// functions to change as well.
-	if fileName != "" {
-		fileHashes := readHashesFromFile(fileName)
+	inputHash := flag.Arg(0)
+	_, err := os.Stat(inputHash)
+
+	// FIXME: This section has code repetition that could maybe reduced.
+	// User supplied a file that has hashes
+	if err != nil {
+		results := gdth.Detect(inputHash)
+
+		switch *outputMode {
+		case "csv":
+			gdth.PrintCSV(results)
+		default:
+			gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"})
+		}
+	} else {
+		fileHashes := readHashesFromFile(inputHash)
 		for _, hash := range fileHashes {
 			results := gdth.Detect(hash)
 
@@ -54,19 +63,9 @@ func main() {
 				fmt.Printf("\nHash: %s\n", hash)
 				gdth.PrintCSV(results)
 			default:
-				fmt.Printf("\nHash: %s\n", hash)				 
+				fmt.Printf("\nHash: %s\n", hash)
 				gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"})
 			}
-		}
-	} else {
-		inputHash := flag.Arg(0)
-		results := gdth.Detect(inputHash)
-		
-		switch *outputMode {
-		case "csv":
-			gdth.PrintCSV(results)
-		default:
-			gdth.PrintTable(results, []string{"Name", "HashCat", "John", "Extended?"})
 		}
 	}
 
