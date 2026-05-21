@@ -31,12 +31,10 @@ go build cmd/gdth/gdth.go
 
 ```bash
 # Display help/usage
-gdth -h
 Usage of ./gdth:
-  -file string
-        Read hashes from a file
   -format string
         Output mode. Options: table, csv (default "table")
+
 
 # Detecting single hash
 gdth <input_hash>
@@ -45,8 +43,11 @@ gdth <input_hash>
 gdth -format csv <input_hash>
 
 # Read hashes from a file (also works with the format flag)
-gdth -file <path_to_file>
-gdth -format csv -file <path_to_file>
+gdth <path_to_file>
+gdth -format csv <path_to_file>
+
+# ex:
+gdth some-file.txt
 ```
 
 The output has 4 fields:
