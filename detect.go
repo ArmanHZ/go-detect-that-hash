@@ -39,73 +39,63 @@ func prepareTableItem(item string, padding int) string {
 	return result
 }
 
-func getGreatestLength(header string, words []string) int {
-	maxLen := len(header)
-		for _, word := range words {
-			if len(word) > maxLen {
-				maxLen = len(word)
-			}
+func getColumnSizesWithPaddings(hashes []HashInfo) []int {
+	// Default sizes in case of empty output.
+	// These are the sizes of the column title text + 2 for padding.
+	sizes := []int{6, 9, 6, 11}
+
+	// We only need to get max sizes of Name and John fields.
+	// The hashcat field is a number only field and goes up to a 7 digit number at max.
+	// The Extended field is a boolean field, so we use the size of the column.
+	for _, v := range hashes {
+		if len(v.Name) > sizes[0] {
+			sizes[0] = len(v.Name)
 		}
-		return maxLen+2
-}
-
-
-func sortDetectSlice(results []HashInfo) ([]string, []string, []string, []string) {
-	//return all as slice of strings so that GetMaxLength will be readable and maintainable
-	var name, john, hashcat, extended []string
-	for _, v := range results {
-		strHC := strconv.Itoa(v.Hashcat)
-		strExtd := strconv.FormatBool(v.Extended)
-		name = append(name, v.Name)
-		hashcat = append(hashcat, strHC)
-		john = append(john, v.John)
-		extended = append(extended, strExtd)
+		if len(v.John) > sizes[2] {
+			sizes[2] = len(v.John)
+		}
 	}
-	return name, hashcat, john, extended
+
+	// Adding 2 for left and right padding.
+	sizes[0] += 2
+	sizes[2] += 2
+
+	return sizes
 }
-// Column width should be generated programatically, get padding from value with greatest length
-// Static column width (provided by dev) is prone to panic "panic: strings: negative Repeat count" when length of an item
-// is greater than provided static length. Forcing dev to give a higher upper limit column length, where mostly that much
-//space is not needed
 
 func PrintTable(hashes []HashInfo, headers []string) {
-	nameSlice, hcSlice, johnSlice, extendedSlice := sortDetectSlice(hashes)
-	nameLen := getGreatestLength(headers[0], nameSlice)
-	hashcatLen := getGreatestLength(headers[1], hcSlice)
-	johnLen := getGreatestLength(headers[2], johnSlice)
-	extendedLen := getGreatestLength(headers[3], extendedSlice)
-	tableLine := printTableLine(nameLen+hashcatLen+johnLen+extendedLen)
+	coulmnSizes := getColumnSizesWithPaddings(hashes)
+	tableLine := printTableLine(coulmnSizes...)
 
-	// fmt.Println(printTableLine(paddings...))
 	fmt.Println(tableLine)
 
-	fmt.Print(prepareTableItem(headers[0], nameLen))
-	fmt.Print(prepareTableItem(headers[1], hashcatLen))
-	fmt.Print(prepareTableItem(headers[2], johnLen))
-	fmt.Println(prepareTableItem(headers[3], extendedLen))
+	fmt.Print(prepareTableItem(headers[0], coulmnSizes[0]))
+	fmt.Print(prepareTableItem(headers[1], coulmnSizes[1]))
+	fmt.Print(prepareTableItem(headers[2], coulmnSizes[2]))
+	fmt.Println(prepareTableItem(headers[3], coulmnSizes[3]))
 
-	//fmt.Println(printTableLine(paddings...))
 	fmt.Println(tableLine)
 
 	for _, v := range hashes {
-		fmt.Print(prepareTableItem(v.Name, nameLen))
+		fmt.Print(prepareTableItem(v.Name, coulmnSizes[0]))
 		if v.Hashcat == -1 {
-			fmt.Print(prepareTableItem("N/A", hashcatLen))
+			fmt.Print(prepareTableItem("N/A", coulmnSizes[1]))
 		} else {
-			fmt.Print(prepareTableItem(strconv.Itoa(v.Hashcat), hashcatLen))
+			fmt.Print(prepareTableItem(strconv.Itoa(v.Hashcat), coulmnSizes[1]))
 		}
 		if v.John == "" {
-			fmt.Print(prepareTableItem("N/A", johnLen))
+			fmt.Print(prepareTableItem("N/A", coulmnSizes[2]))
 		} else {
-			fmt.Print(prepareTableItem(v.John, johnLen))
+			fmt.Print(prepareTableItem(v.John, coulmnSizes[2]))
 		}
 		if v.Extended {
-			fmt.Print(prepareTableItem("True", extendedLen))
+			fmt.Print(prepareTableItem("True", coulmnSizes[3]))
 		} else {
-			fmt.Print(prepareTableItem("False", extendedLen))
+			fmt.Print(prepareTableItem("False", coulmnSizes[3]))
 		}
 		fmt.Println()
 	}
+
 	fmt.Println(tableLine)
 }
 
